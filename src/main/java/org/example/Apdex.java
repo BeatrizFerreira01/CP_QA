@@ -12,14 +12,13 @@ package org.example;
  *   0.50 até 0.69   -> POOR
  *   < 0.50          -> UNACCEPTABLE
  */
-
 public class Apdex {
 
     public double calcular(double satisfeitos, double toleraveis, double total) {
         if (total <= 0) {
-            throw new IllegalArgumentException("Total deve ser maior que zero");
+            throw new IllegalArgumentException("Total deve ser maior que zero.");
         }
-        return (satisfeitos + (toleraveis / 2.0)) / total;
+        return (satisfeitos + 0.5 * toleraveis) / total;
     }
 
     public String classificar(double score) {
@@ -28,5 +27,19 @@ public class Apdex {
         if (score >= 0.70) return "FAIR";
         if (score >= 0.50) return "POOR";
         return "UNACCEPTABLE";
+    }
+
+    // 🚀 Aqui vai o código que estava antes na Main
+    public static void executar() {
+        Apdex apdex = new Apdex();
+
+        long total = 555_698;   // meu RM como total de amostras
+        long satisfeitos = Math.round(total * 0.90);
+        long toleraveis = Math.round(total * 0.00);
+
+        double score = apdex.calcular(satisfeitos, toleraveis, total);
+        String faixa = apdex.classificar(score);
+
+        System.out.println("APDEX = " + String.format("%.3f", score) + " -> " + faixa);
     }
 }
