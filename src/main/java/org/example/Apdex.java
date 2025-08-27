@@ -29,7 +29,6 @@ public class Apdex {
         return "UNACCEPTABLE";
     }
 
-    // 🚀 Aqui vai o código que estava antes na Main
     public static void executar() {
         Apdex apdex = new Apdex();
 
